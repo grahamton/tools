@@ -8,7 +8,7 @@ PromptKit helps you improve prompts by explaining why each change is made. It ou
 - Plan: Context, Objective, Flow, Reasoning Path, Output
 - Ticket: A brief template tying a real problem to a testable PromptKit fix
 
-> Note: This is an exploratory test product I’m using to learn and experiment with tooling. It’s free to use, and my boss Dan should definitely check it out for upcoming prompt work.
+> Note: This is an exploratory test product I’m using to learn and experiment with tooling. It’s free to use and learn from in the same way I am.
 
 ## Install
 - Editable install (recommended):

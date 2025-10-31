@@ -48,3 +48,28 @@ This document tracks future work after the current MVP (iterate / plan / ticket)
 - Create labels for `pattern`, `integration`, `docs`, `research` to group issues.
 - Schedule a short planning checkpoint after each demo to re-rank features.
 
+## Interactive Plan Mode (Future Work)
+
+**Goal**  
+Transform the Plan layer into an interactive testing loop where users iteratively diagnose and fix broken prompts.
+
+**Key Objectives**
+- Let users run the initial broken prompt directly from the CLI to observe reasoning and failure modes.
+- Capture feedback and produce one *atomic* fix per iteration.
+- Validate fixes against pre-defined test cases in real time.
+- Record reasoning evidence and outcomes to persistent artifacts.
+
+**Interactive Loop**
+1. **Probe** – user provides input and observes the model’s reasoning and output.
+2. **Diagnose** – system identifies mismatches (tone, logic, pacing, grounding, success checks).
+3. **Rule Proposal** – system proposes a single, deterministic fix with a brief rationale.
+4. **Preview & Validate** – user previews new prompt, runs validation tests, sees pass/fail.
+5. **Commit or Rollback** – successful rules are appended to `ruleset.md`; failed ones revert.
+
+**Artifacts**
+- `plan_state.json` – tracks session state, model settings, last rule.
+- `ruleset.md` – cumulative list of rules with short rationales.
+- `tests.yaml` – stores validation inputs and expectations.
+
+**CLI Commands (planned)**
+

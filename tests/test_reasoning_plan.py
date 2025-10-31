@@ -38,16 +38,24 @@ def test_build_plan_includes_all_sections(sample_seed: SeedQuestion, sample_step
     for heading in ["Context", "Objective", "Flow", "Reasoning Path", "Output"]:
         assert heading in plan
 
-    assert "1. Clarified welcome messaging." in plan
-    assert "triggered by Support tickets highlighting confusion." in plan
+    assert (
+        "1. Problem statement: Because Support tickets highlighting confusion, we Clarified welcome messaging"
+        in plan
+    )
+    assert "Result: Activation rate improved by 5%." in plan
 
 
 def test_causal_link_formatting(sample_steps: list[IterationStep]):
     reasoning = format_reasoning_trace(sample_steps)
-    assert "Rationale — Reduce friction by explaining value upfront. → Outcome — Activation rate improved by 5%." in reasoning
+    assert reasoning.count("\n") == 5
+    assert reasoning.startswith("1. Baseline:")
+    assert reasoning.endswith("Clarified welcome messaging → Activation rate improved by 5%")
+    assert ".," not in reasoning
 
 
 def test_reasoning_trace_has_six_lines(sample_steps: list[IterationStep]):
     reasoning = format_reasoning_trace(sample_steps)
     lines = [line for line in reasoning.splitlines() if line.strip()]
     assert len(lines) == 6
+    assert lines[0].startswith("1. Baseline:")
+    assert lines[-1].startswith("6. Insight:")

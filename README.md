@@ -76,3 +76,6 @@ See the step-by-step business guide: `GUIDE_BUSINESS.md`.
 
 ## Demo Playbook
 - Want to show PromptKit live? Follow `DEMO_GUIDE.md` for a 5–7 minute walkthrough covering Iterate Card, Plan, Ticket, and the business runner.
+
+## Roadmap
+- Future work (prompt ingestion, model considerations, validation tooling, team workflows) is tracked in `ROADMAP.md`.

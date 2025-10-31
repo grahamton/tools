@@ -19,6 +19,30 @@ PromptKit helps you improve prompts by explaining why each change is made. It ou
 - Core capabilities today and on the roadmap include intent-to-behavior comparison, structured defect logging, delta planning, grounding validation, tone/pacing review, and session replay with reasoning traces.
 - Philosophy: *prompts are systems, not sentences*. PromptKit aims to bridge prompt authorship, system design, and operational reliability.
 
+## Why PromptKit
+- **Uncovers the root cause.** Pinpoints why prompts fail—goal drift, missing state, tone breaks—before they hurt the experience.
+- **Explains the fix.** Every recommendation ships with reasoning, validation steps, and copy-pasteable prompt patches.
+- **Works across models.** Because it targets reasoning patterns, you can use the output with GPT-4, Claude, Llama, or internal stacks.
+- **Ready for teams.** Plans, tickets, and iterate cards are designed for handoffs between PMs, prompt engineers, and operators.
+
+## What You Get In Minutes
+1. **Iterate Card** – a focused change (Diagnosis → Fix → Validation) for your Seed + Friction.
+2. **Plan** – a one-page narrative showing causal flow, reasoning path, and expected output.
+3. **Ticket** – a briefing you can drop into Jira/Notion to align stakeholders.
+4. **Business Runner** – a single promptlet for non-technical teammates to self-serve fixes.
+
+## Where It Fits
+- Refreshing voice agents, sales scripts, and customer support flows.
+- Diagnosing multi-step agents and retrieval chains that lose context mid-flight.
+- Rapid prototyping for product strategists evaluating prompt fit before committing to code.
+- Coaching domain experts (mortgage, hospitality, biotech) to turn intuition into structured prompt logic.
+
+## In Action (Snap Examples)
+- **SnackSmith kiosk** – turned “sweet but airy” into structured flavor variables and validation steps.
+- **TravelMate trip planner** – clarified emotional language (“quiet, inspiring”) into budget/timeline constraints.
+- **BrewBuddy barista** – kept allergy and taste preferences in a live ledger to prevent remakes.
+- **Myco grower assistant** – disambiguated sensory cues (“fuzzy but fine”) to avoid false contamination calls.
+
 ## Install
 - Editable install (recommended):
   - `python -m pip install -e .`

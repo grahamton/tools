@@ -8,7 +8,16 @@ PromptKit helps you improve prompts by explaining why each change is made. It ou
 - Plan: Context, Objective, Flow, Reasoning Path, Output
 - Ticket: A brief template tying a real problem to a testable PromptKit fix
 
-> Note: This is an exploratory test product I’m using to learn and experiment with tooling. It’s free to use and learn from in the same way I am.
+> Note: This is an exploratory test product I'm using to learn and experiment with tooling. It's free to use and learn from in the same way I am—and my boss Dan should definitely check it out for upcoming prompt work.
+
+## Scope
+- PromptKit is a prompt system diagnostic and optimization framework, not a syntax fixer.
+- It compares intended behavior vs. actual outcomes, surfacing breakdowns in reasoning, tone, grounding, control flow, and success checks.
+- Two lenses:
+  - **Prompt Repair Layer** — detect & correct flaws inside a single prompt or template.
+  - **System Diagnostic Layer** — model how prompts behave in production flows (multi-step agents, retrieval pipelines, chat orchestration) to spot control gaps.
+- Core capabilities today and on the roadmap include intent-to-behavior comparison, structured defect logging, delta planning, grounding validation, tone/pacing review, and session replay with reasoning traces.
+- Philosophy: *prompts are systems, not sentences*. PromptKit aims to bridge prompt authorship, system design, and operational reliability.
 
 ## Install
 - Editable install (recommended):

@@ -8,40 +8,27 @@ PromptKit helps you improve prompts by explaining why each change is made. It ou
 - Plan: Context, Objective, Flow, Reasoning Path, Output
 - Ticket: A brief template tying a real problem to a testable PromptKit fix
 
-> Note: This is an exploratory test product I'm using to learn and experiment with tooling. It's free to use and learn from in the same way I am—and my boss Dan should definitely check it out for upcoming prompt work.
+> Note: This is an exploratory test product I'm using to learn and experiment with tooling. It's free to use, and my boss Dan should definitely take a look for upcoming prompt work.
 
-## Scope
-- PromptKit is a prompt system diagnostic and optimization framework, not a syntax fixer.
-- It compares intended behavior vs. actual outcomes, surfacing breakdowns in reasoning, tone, grounding, control flow, and success checks.
-- Two lenses:
-  - **Prompt Repair Layer** — detect & correct flaws inside a single prompt or template.
-  - **System Diagnostic Layer** — model how prompts behave in production flows (multi-step agents, retrieval pipelines, chat orchestration) to spot control gaps.
-- Core capabilities today and on the roadmap include intent-to-behavior comparison, structured defect logging, delta planning, grounding validation, tone/pacing review, and session replay with reasoning traces.
-- Philosophy: *prompts are systems, not sentences*. PromptKit aims to bridge prompt authorship, system design, and operational reliability.
+## Scope in One Glance
+- PromptKit is a prompt system diagnostic and optimization framework—not a syntax fixer.
+- It compares intended behavior against real output to surface breakdowns in reasoning, tone, grounding, pacing, and success checks.
+- Two operating lenses:
+  - **Prompt Repair Layer** – tighten the logic of a single prompt or template.
+  - **System Diagnostic Layer** – trace control gaps across agents, retrieval steps, and orchestration flows.
+- Guiding principle: *prompts are systems, not sentences*.
 
-## Why PromptKit
-- **Uncovers the root cause.** Pinpoints why prompts fail—goal drift, missing state, tone breaks—before they hurt the experience.
-- **Explains the fix.** Every recommendation ships with reasoning, validation steps, and copy-pasteable prompt patches.
-- **Works across models.** Because it targets reasoning patterns, you can use the output with GPT-4, Claude, Llama, or internal stacks.
-- **Ready for teams.** Plans, tickets, and iterate cards are designed for handoffs between PMs, prompt engineers, and operators.
+## What PromptKit Delivers
+- **Root-cause clarity** – see the exact mismatch between goal and behavior.
+- **Actionable fixes** – each Iterate Card ships a diagnosis, rules to drop into your prompt, plus validation scenarios.
+- **Story-ready plans** – one-page summaries explain the reasoning chain for stakeholders.
+- **Team handoffs** – Tickets and the PowerShell runner let PMs, ops, or subject-matter experts self-serve improvements.
 
-## What You Get In Minutes
-1. **Iterate Card** – a focused change (Diagnosis → Fix → Validation) for your Seed + Friction.
-2. **Plan** – a one-page narrative showing causal flow, reasoning path, and expected output.
-3. **Ticket** – a briefing you can drop into Jira/Notion to align stakeholders.
-4. **Business Runner** – a single promptlet for non-technical teammates to self-serve fixes.
-
-## Where It Fits
-- Refreshing voice agents, sales scripts, and customer support flows.
-- Diagnosing multi-step agents and retrieval chains that lose context mid-flight.
-- Rapid prototyping for product strategists evaluating prompt fit before committing to code.
-- Coaching domain experts (mortgage, hospitality, biotech) to turn intuition into structured prompt logic.
-
-## In Action (Snap Examples)
-- **SnackSmith kiosk** – turned “sweet but airy” into structured flavor variables and validation steps.
-- **TravelMate trip planner** – clarified emotional language (“quiet, inspiring”) into budget/timeline constraints.
+## Where It’s Already Helping
+- **SnackSmith kiosk** – mapped “sweet but airy” to concrete flavor controls and tests.
+- **TravelMate trip planner** – translated emotional language (“quiet, inspiring”) into budget and timeline constraints.
 - **BrewBuddy barista** – kept allergy and taste preferences in a live ledger to prevent remakes.
-- **Myco grower assistant** – disambiguated sensory cues (“fuzzy but fine”) to avoid false contamination calls.
+- **Myco grower assistant** – clarified “fuzzy but fine” jars into safe vs. contaminated actions.
 
 ## Install
 - Editable install (recommended):

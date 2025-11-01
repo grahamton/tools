@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PromptKit - Diagnostics</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="/static/htmx.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>PromptKit - Prompt System Diagnostics</h1>
+      <p class="tag">Stop guessing; start diagnosing.</p>
+    </header>
+
+    <section class="container">
+      <aside class="panel">
+        <h2>Inputs</h2>
+        <form method="post" action="/run" hx-post="/run" hx-target="#output" hx-swap="innerHTML">
+          <label>Seed (one sentence)</label>
+          <textarea name="seed" rows="2" required>{{ form_defaults.seed }}</textarea>
+
+          <label>Friction (one sentence)</label>
+          <textarea name="friction" rows="2" required>{{ form_defaults.friction }}</textarea>
+
+          <div class="label-row">
+            <label>Pattern (optional)</label>
+            <button type="button" class="info-btn" aria-expanded="false" aria-controls="pattern-help" onclick="toggleBubble('pattern-help', this)" title="Available patterns and what they do">i</button>
+          </div>
+          <input type="text" name="pattern" value="{{ form_defaults.pattern }}" placeholder="constraint-ledger (or comma-separated to combine)" />
+          <div id="pattern-help" class="bubble" role="region" aria-label="Pattern help" hidden>
+            <div class="bubble-title">What is a Pattern?</div>
+            <p>Patterns are deterministic rule sets that shape the Iterate Card. They don't use scoring and can be combined by comma.</p>
+            <ul class="bubble-list">
+              <li><code>constraint-ledger</code> - Keep a running list of constraints (include/avoid/not_too/vibes); echo and confirm before action. Prevents contradictions and preserves user intent.</li>
+              <li><code>contrastive-clarify</code> - Ask one either/or to pin down an ambiguous term; reflect the choice; proceed. Reduces guessing and keeps momentum.</li>
+              <li><code>exemplar-propose</code> - Offer two tiny, concrete options that both fit constraints; ask which is closer or what to tweak. Anchors vague requests with concrete proposals.</li>
+              <li><code>override-hook</code> - Simple staff commands (override/lock/reduce/reset) that apply immediately and are echoed. Enables fast corrections without restarting the flow.</li>
+              <li><code>state-bag</code> - Keep explicit state (goal/include/avoid/not_too/memory/next_step/confirmed); echo updates; confirm before finalizing. Prevents drift and contradictions.</li>
+              <li><code>slot-filling</code> - Ask only for missing required fields; never re-ask captured ones; echo and confirm summary. Reduces redundant questions.</li>
+            </ul>
+            <p class="bubble-note">Tip: Leave blank to auto-detect based on your Friction. Combine like <code>constraint-ledger,contrastive-clarify</code>. Learn more: <a href="/research" target="_blank">Why These Patterns?</a></p>
+          </div>
+
+          <div class="label-row">
+            <label>Output</label>
+            <button type="button" class="info-btn" aria-expanded="false" aria-controls="mode-help" onclick="toggleBubble('mode-help', this)" title="Why three modes?">i</button>
+          </div>
+          <div id="mode-help" class="bubble" role="region" aria-label="Mode help" hidden>
+            <div class="bubble-title">Why three modes?</div>
+            <ul class="bubble-list">
+              <li><strong>Iterate Card (Fix)</strong> — One atomic fix today: Diagnosis → Fix → Prompt patch → Validation.</li>
+              <li><strong>Plan (Explain)</strong> — Align stakeholders: Context → Objective → Flow → Reasoning Path → Output.</li>
+              <li><strong>Ticket (Handoff)</strong> — Shareable brief: Client → Problem → Test → Goal → Success.</li>
+            </ul>
+            <p class="bubble-note">Pick Iterate Card for fast copy‑paste. Switch to Plan or Ticket when sharing.</p>
+          </div>
+          <div class="row">
+            <label><input type="radio" name="mode" value="iterate" {{ 'iterate' == form_defaults.mode and 'checked' or '' }}> Iterate Card</label>
+            <label><input type="radio" name="mode" value="plan"> Plan</label>
+            <label><input type="radio" name="mode" value="ticket"> Ticket</label>
+          </div>
+
+          <div class="row">
+            <label><input type="checkbox" name="ascii_only" {{ form_defaults.ascii_only and 'checked' or '' }}> ASCII-only</label>
+            <label><input type="checkbox" name="json_out" {{ form_defaults.json_out and 'checked' or '' }}> JSON (Iterate only)</label>
+          </div>
+
+          <div class="row" id="compare-row" {% if not flags or not flags.compare %}style="display:none"{% endif %}>
+            <label><input type="checkbox" name="compare" value="true"> Compare Iterate and Plan</label>
+          </div>
+
+          <div class="actions">
+            <button type="submit">Run</button>
+            <span class="htmx-indicator spinner">Loading…</span>
+            <a class="btn" href="/?preset=snacks{% if flags_str %}&flags={{ flags_str }}{% endif %}">Preset: SnackSmith</a>
+            <a class="btn" href="/?preset=bard{% if flags_str %}&flags={{ flags_str }}{% endif %}">Preset: Bard</a>
+            <a class="btn" href="/?preset=chef{% if flags_str %}&flags={{ flags_str }}{% endif %}">Preset: Chef</a>
+            <a class="btn" href="/?preset=roomba{% if flags_str %}&flags={{ flags_str }}{% endif %}">Preset: Roomba</a>
+            <a class="btn" href="/?preset=weather{% if flags_str %}&flags={{ flags_str }}{% endif %}">Preset: Weather</a>
+            <a class="btn" href="/?preset=travelmate{% if flags_str %}&flags={{ flags_str }}{% endif %}">Preset: TravelMate</a>
+          </div>
+        </form>
+      </aside>
+
+      <main class="panel">
+        <h2>Output</h2>
+        {% if errors %}
+          <div class="alert">
+            {% for e in errors %}<div>{{ e }}</div>{% endfor %}
+          </div>
+        {% endif %}
+        <div id="output" class="output">
+          {% if result %}
+            {% include "_output.html" %}
+            {% if compare %}
+              {% include "_compare.html" %}
+            {% endif %}
+          {% else %}
+            <p class="muted">Run with your Seed and Friction to see results here.</p>
+          {% endif %}
+        </div>
+      </main>
+    </section>
+
+    <footer>
+      <p>
+        PromptKit is an explain-first Prompt System Diagnostics Framework. Works without seeing the original prompt. <a href="/research" target="_blank">Why These Patterns?</a>
+      </p>
+    </footer>
+
+    <div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+    <script>
+      function toggleBubble(id, btn){
+        var el = document.getElementById(id);
+        if(!el) return;
+        var isHidden = el.hasAttribute('hidden');
+        if(isHidden){ el.removeAttribute('hidden'); btn && btn.setAttribute('aria-expanded','true'); }
+        else { el.setAttribute('hidden',''); btn && btn.setAttribute('aria-expanded','false'); }
+      }
+      function copyFromHidden(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        var text = (el.value !== undefined) ? el.value : (el.textContent || '');
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function(){ showToast('Copied to clipboard'); });
+        } else {
+          var ta = document.createElement('textarea');
+          ta.value = text; document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); showToast('Copied to clipboard'); } catch(e){}
+          document.body.removeChild(ta);
+        }
+      }
+      function showToast(msg) {
+        var t = document.getElementById('toast');
+        if (!t) return;
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(function(){ t.classList.remove('show'); }, 1200);
+      }
+    </script>
+  </body>
+  </html>

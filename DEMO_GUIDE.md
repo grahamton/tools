@@ -26,12 +26,16 @@ Use this flow to walk someone through PromptKit in 5-7 minutes.
   `promptkit ticket --seed "..." --friction "..." --client "ClientName" --ascii`
 - Say: "This is the shareable brief for teammates - problem, fix, success checks."
 
-## 5. Show the Business Runner (optional, 1 min)
+## 5. Web UI (optional, 1 min)
+- Run locally: `uvicorn webapp.main:app --reload --port 8000` then open `http://localhost:8000`
+- Use a preset (SnackSmith, Bard, etc.), click Run
+- Show: copy/download, Human summary, Where to place sections, Compare (enable with `?flags=compare`)
+
+## 6. Show the Business Runner (optional, 1 min)
 - In PowerShell: `./promptkit-run.ps1`
 - Enter the same Seed/Friction live to show the low-friction path for non-technical users.
 
-## 6. Close with Outcomes
+## 7. Close with Outcomes
 - PromptKit delivers: a fix, the why, and a handoff brief from two sentences.
 - Works across prompts/models, because it focuses on reasoning patterns, not raw prompt text.
 - Stop guessing; start diagnosing.
-

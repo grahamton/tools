@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PromptKit - Why These Patterns?</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Why These Patterns?</h1>
+      <p class="tag">Plain‑English notes on where they come from.</p>
+    </header>
+
+    <section class="container">
+      <main class="panel" style="width:100%">
+        <h2>Deterministic Patterns</h2>
+        <p>PromptKit favors small, deterministic rules. This keeps fixes explainable and reusable across models.</p>
+
+        <h3>Constraint Ledger</h3>
+        <p>Inspired by checklists and confirmation practices. Prevents contradictions by echoing include/avoid/not_too/vibes before action.</p>
+
+        <h3>Contrastive Clarify</h3>
+        <p>One either/or clarifier comes from repair strategies in conversation design. Reduces guessing, keeps momentum.</p>
+
+        <h3>Exemplar Propose</h3>
+        <p>Using tiny concrete options anchors vague requests—similar to design probes and A/B choice framing.</p>
+
+        <h3>Override Hook</h3>
+        <p>Operational control pattern: quick commands (override/lock/reduce/reset) for fast, explicit corrections.</p>
+
+        <h3>State Bag</h3>
+        <p>Keep explicit state (goal/include/avoid/not_too/memory/next_step/confirmed). Echo updates and confirm before finalizing. Borrowed from control loops and recap checklists.</p>
+
+        <h3>Slot Filling</h3>
+        <p>Classic dialog “form filling”: define required slots, ask only for missing, never re‑ask captured ones. Summarize and confirm.</p>
+
+        <h2>Related Research & Frameworks</h2>
+        <ul>
+          <li>Dialog systems: slot filling, confirmation/repair strategies</li>
+          <li>Checklists & control loops: PDCA (Plan‑Do‑Check‑Act), recap & confirm</li>
+          <li>Software practices: preconditions, output contracts, TDD‑style pass criteria</li>
+          <li>Reasoning frameworks: Chain‑of‑Thought (CoT), Tree‑of‑Thought (ToT), ReAct, Reflexion</li>
+          <li>Programmatic guards: schema‑first generation (e.g., output contracts)</li>
+        </ul>
+
+        <h2>Model Considerations (Advisory)</h2>
+        <ul>
+          <li>Prefer short, atomic rules; avoid chained instructions</li>
+          <li>Echo state/constraints briefly; confirm before finalizing</li>
+          <li>Use clear section headings to enforce output shape</li>
+        </ul>
+
+        <p class="muted">These notes are informational. PromptKit patterns remain deterministic and model‑agnostic by design.</p>
+      </main>
+    </section>
+  </body>
+  </html>
+

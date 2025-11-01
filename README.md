@@ -34,14 +34,30 @@ PromptKit helps you improve prompts by explaining why each change is made. For p
 - Editable install (recommended):
   - `python -m pip install -e .`
 
+## Web App (Optional UI)
+- Run locally:
+  - `python -m pip install -r webapp/requirements.txt`
+  - `uvicorn webapp.main:app --reload --port 8000`
+  - Open `http://localhost:8000`
+- Flags (optional):
+  - Query: `?flags=compare,feedback`
+  - Env: `PK_UI_COMPARE=1`, `PK_UI_FEEDBACK=1`
+- Useful routes: `/modes`, `/research`, `/health`
+- Presets: SnackSmith, Bard, Chef, Roomba, Weather, TravelMate
+- Features: copy/download, Compare (flag), Download Session/Feedback (no telemetry)
+
 ## Commands
 ### iterate
 Generate a single Iterate Card from a seed and a friction point.
 - Usage:
-  - `promptkit iterate --seed "..." --friction "..." [--pattern <name>] [--ascii] [--json]`
-- Patterns (no scoring): `constraint-ledger`, `contrastive-clarify`, `exemplar-propose`, `override-hook`
+  - `promptkit iterate --seed "..." --friction "..." [--pattern <name>[,<name>...]] [--ascii] [--json]`
+- Patterns (no scoring): `constraint-ledger`, `contrastive-clarify`, `exemplar-propose`, `override-hook`, `state-bag`, `slot-filling`
+- Combine patterns by comma to merge behaviors deterministically.
 - Example (SnackSmith):
   - `promptkit iterate --seed "SnackSmith flavor assistant helps build custom snacks from natural-language taste descriptions." --friction "Misinterprets adjectives; mixes mismatched flavors; lacks constraints memory; no fast staff override." --pattern constraint-ledger --ascii`
+ - Example (Combined):
+   - `promptkit iterate --seed "..." --friction "..." --pattern "constraint-ledger,contrastive-clarify" --ascii`
+ - Output includes a Human summary and "Where to place in your prompt" section to help you drop lines under Rules/Policy, State/Memory, Clarifiers, Overrides, Interaction/Output.
 
 ### plan
 Produce a compact plan that shows causal reasoning behind the change.
@@ -62,6 +78,10 @@ Print a filled PromptKit ticket to frame work quickly.
 - contrastive-clarify: Ask one either/or to disambiguate a term; reflect choice; proceed.
 - exemplar-propose: Offer two tiny, concrete options that fit constraints; let the user pick or tweak.
 - override-hook: Simple staff commands (override/lock/reduce/reset); apply immediately and echo.
+- state-bag: Keep explicit state (goal/include/avoid/not_too/memory/next_step/confirmed); echo updates; confirm before finalizing.
+- slot-filling: Ask only for missing required fields; echo and confirm summary before actions.
+
+See also: Why These Patterns? (run the UI at `http://localhost:8000` and open `/research`).
 
 ## Notes
 - Use `--ascii` to avoid Unicode rendering issues in terminals.
@@ -69,6 +89,8 @@ Print a filled PromptKit ticket to frame work quickly.
 
 ## Status
 - iterate, plan, and ticket commands are implemented. More patterns and helpers can be added as needed.
+
+Why Three Modes? (run the UI at `http://localhost:8000` and open `/modes`).
 
 ## Business Runner (PowerShell)
 - From the repo root, run: `./promptkit-run.ps1`
@@ -101,3 +123,7 @@ See the step-by-step business guide: `GUIDE_BUSINESS.md`.
 
 ## Roadmap
 - Future work (prompt ingestion, model considerations, validation tooling, team workflows) is tracked in `ROADMAP.md`.
+
+## Changelog
+- See `CHANGELOG.md` for unreleased changes and version history.
+- Commit style: Conventional Commits (e.g., `feat:`, `fix:`, `docs:`) to make future release notes easier to generate.

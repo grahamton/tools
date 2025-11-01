@@ -1,0 +1,81 @@
+{% if errors %}
+  <div class="alert">
+    {% for e in errors %}<div>{{ e }}</div>{% endfor %}
+  </div>
+
+  {% if flags and flags.feedback %}
+  <div class="feedback">
+    <h3>Feedback</h3>
+    <div class="row">
+      <label><input type="radio" name="fb_useful" value="yes"> Useful</label>
+      <label><input type="radio" name="fb_useful" value="no"> Not useful</label>
+    </div>
+    <label>Comment (optional)</label>
+    <textarea id="fb_comment" rows="3" placeholder="What helped? What was confusing?"></textarea>
+    <form id="fb_form" action="/download/json" method="post" style="margin-top:8px;">
+      <input type="hidden" name="filename" value="feedback.json" />
+      <textarea id="fb_payload" name="content" class="hidden-textarea"></textarea>
+      <button type="button" class="btn" onclick="prepareFeedbackAndSubmit()">Download Feedback</button>
+    </form>
+  </div>
+  <script>
+    function prepareFeedbackAndSubmit(){
+      var usefulEl = document.querySelector('input[name="fb_useful"]:checked');
+      var useful = usefulEl ? usefulEl.value : '';
+      var comment = (document.getElementById('fb_comment')||{}).value || '';
+      var payload = {
+        seed: ({{ (inputs.seed|tojson) if inputs else '""' }}),
+        friction: ({{ (inputs.friction|tojson) if inputs else '""' }}),
+        pattern: ({{ (inputs.pattern|tojson) if inputs else '""' }}),
+        mode: ({{ (result.mode|tojson) }}),
+        useful: useful,
+        comment: comment,
+        timestamp: new Date().toISOString()
+      };
+      var ta = document.getElementById('fb_payload');
+      ta.value = JSON.stringify(payload, null, 2);
+      document.getElementById('fb_form').submit();
+    }
+  </script>
+  {% endif %}
+{% endif %}
+
+{% if result %}
+  <div class="download">
+    <form action="/download/text" method="post">
+      <input type="hidden" name="filename" value="{{ result.filename_hint }}.txt" />
+      <textarea id="result-text" name="content" class="hidden-textarea">{{ result.text }}</textarea>
+      <button type="submit">Download Text</button>
+    </form>
+    <button type="button" class="btn" onclick="copyFromHidden('result-text')">Copy Text</button>
+    {% if result.json %}
+    <form action="/download/json" method="post">
+      <input type="hidden" name="filename" value="{{ result.filename_hint }}.json" />
+      <textarea id="result-json" name="content" class="hidden-textarea">{{ result.json | tojson }}</textarea>
+      <button type="submit">Download JSON</button>
+    </form>
+    <button type="button" class="btn" onclick="copyFromHidden('result-json')">Copy JSON</button>
+    {% endif %}
+    <form action="/download/json" method="post">
+      <input type="hidden" name="filename" value="session.json" />
+      <textarea id="session-json" name="content" class="hidden-textarea">{{ {
+        'seed': inputs.seed if inputs else '',
+        'friction': inputs.friction if inputs else '',
+        'pattern': inputs.pattern if inputs else '',
+        'mode': result.mode,
+        'ascii_only': inputs.ascii_only if inputs else False,
+        'json_out': inputs.json_out if inputs else False,
+        'output': {'text': result.text, 'json': result.json}
+      } | tojson }}</textarea>
+      <button type="submit">Download Session</button>
+    </form>
+  </div>
+
+  <h3>Text</h3>
+  <pre class="code">{{ result.text }}</pre>
+
+  {% if result.json %}
+  <h3>JSON</h3>
+  <pre class="code">{{ result.json | tojson(indent=2) }}</pre>
+  {% endif %}
+{% endif %}

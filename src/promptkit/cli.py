@@ -18,7 +18,7 @@ app = typer.Typer(help="PromptKit: Prompt System Diagnostics Framework — stop 
 def iterate(
     seed: str = typer.Option(..., help="One-line seed (role + goal)"),
     friction: str = typer.Option(..., help="Biggest current friction/failure"),
-    pattern: str = typer.Option(None, help="Optional pattern: constraint-ledger | contrastive-clarify | exemplar-propose | override-hook"),
+    pattern: str = typer.Option(None, help="Optional pattern(s): constraint-ledger | contrastive-clarify | exemplar-propose | override-hook | state-bag | slot-filling (comma-separated to combine)"),
     ascii_only: bool = typer.Option(False, "--ascii", help="Emit ASCII-only output"),
     json_out: bool = typer.Option(False, "--json", help="Return machine-readable JSON"),
 ) -> None:

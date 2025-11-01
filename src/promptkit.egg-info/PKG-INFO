@@ -1,26 +1,35 @@
+Metadata-Version: 2.4
+Name: promptkit
+Version: 0.0.1
+Summary: Explain-first prompt iteration toolkit (MVP)
+Author: PromptKit
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: typer>=0.9
+
 ﻿# PromptKit
 
-PromptKit: The Prompt System Diagnostics Framework. Stop guessing and start fixing by diagnosing root causes and standardizing validated fixes.
+Explain-first prompt iteration toolkit (MVP).
 
 ## Overview
-PromptKit helps you improve prompts by explaining why each change is made. For prompt engineers, product managers, and ops teams who waste time on trial-and-error prompt tuning and can’t explain why a change worked. It outputs small, deterministic artifacts:
+PromptKit helps you improve prompts by explaining why each change is made. It outputs small, deterministic artifacts:
 - Iterate Card: Diagnosis -> Fix -> Validation
 - Plan: Context, Objective, Flow, Reasoning Path, Output
 - Ticket: A brief template tying a real problem to a testable PromptKit fix
 
-> Note: This is an exploratory test product I'm using to learn and experiment with tooling.
+> Note: This is an exploratory test product I'm using to learn and experiment with tooling. It's free to use, and my boss Dan should definitely take a look for upcoming prompt work.
 
-## How It Works
-- PromptKit is a prompt system diagnostics framework, not a syntax fixer. Stop guessing; start diagnosing.
+## Scope in One Glance
+- PromptKit is a prompt system diagnostic and optimization framework—not a syntax fixer.
 - It compares intended behavior against real output to surface breakdowns in reasoning, tone, grounding, pacing, and success checks.
 - Two operating lenses:
-  - **Prompt Repair Layer** - diagnose and tighten a single prompt or template.
-  - **System Diagnostic Layer** - trace control gaps across agents, retrieval, and orchestration flow.
+  - **Prompt Repair Layer** – tighten the logic of a single prompt or template.
+  - **System Diagnostic Layer** – trace control gaps across agents, retrieval steps, and orchestration flows.
 - Guiding principle: *prompts are systems, not sentences*.
 
-## What You Get
+## What PromptKit Delivers
 - **Root-cause clarity** – see the exact mismatch between goal and behavior.
-- **Actionable fixes** - each Iterate Card standardizes a single change into a reusable, testable artifact: diagnosis, rules to drop into your prompt, and validation scenarios.
+- **Actionable fixes** – each Iterate Card ships a diagnosis, rules to drop into your prompt, plus validation scenarios.
 - **Story-ready plans** – one-page summaries explain the reasoning chain for stakeholders.
 - **Team handoffs** – Tickets and the PowerShell runner let PMs, ops, or subject-matter experts self-serve improvements.
 

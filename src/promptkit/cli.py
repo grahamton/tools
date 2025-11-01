@@ -1,4 +1,4 @@
-"""Typer CLI for PromptKit iterate cards and plans (MVP)."""
+"""Typer CLI for PromptKit diagnostics (MVP)."""
 from __future__ import annotations
 
 import json
@@ -11,7 +11,7 @@ from .plan import build_plan_text
 from .ticket import build_ticket_text
 
 
-app = typer.Typer(help="PromptKit: explain-first prompt iteration toolkit (MVP)")
+app = typer.Typer(help="PromptKit: Prompt System Diagnostics Framework — stop guessing; diagnose and standardize fixes.")
 
 
 @app.command()
